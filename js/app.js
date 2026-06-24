@@ -206,14 +206,34 @@ window.addEventListener("error", event => {
 
 async function boot() {
   render();
+
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./service-worker.js").catch(error => console.warn("Service worker registration failed", error));
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .catch(error => console.warn("Service worker registration failed", error));
   }
+
   try {
     await initFirebase();
-    await onUserChanged(async user => {
+
+    await onUserChanged(user => {
       authState = { user, error: "" };
-      if (user) await sync.connect(user.uid); else sync.disconnect();
+
+      if (user) {
+        syncStatus = { kind: "syncing", label: "Signed in — syncing…" };
+        render();
+
+        sync.connect(user.uid).catch(error => {
+          console.warn("Cloud sync failed after sign-in", error);
+          syncStatus = { kind: "warn", label: "Signed in — saved locally" };
+          render();
+        });
+
+        return;
+      }
+
+      sync.disconnect();
+      syncStatus = { kind: "local", label: "Local only" };
       render();
     });
   } catch (error) {
