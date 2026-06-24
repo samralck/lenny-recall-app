@@ -108,3 +108,102 @@ summary { cursor: pointer; font-weight: 900; }
 hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 @media (min-width: 720px) { .session-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; } .session-grid .card { margin: 0; } }
+/* iPhone layout fixes */
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.main {
+  width: 100%;
+  max-width: 780px;
+  overflow-x: hidden;
+}
+
+/* Stop the 42-day trail from overflowing on narrow iPhones */
+.trail {
+  width: 100%;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.node {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  font-size: clamp(0.78rem, 3.1vw, 0.95rem);
+  line-height: 1;
+}
+
+/* Keep normal button styling away from trail buttons */
+button.node {
+  min-height: 0;
+  padding: 0;
+}
+
+/* Prevent iOS input zoom */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* Make the emergency button less intrusive on small iPhones */
+.emergency-fab {
+  right: 10px;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  min-height: 40px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+}
+
+/* Give sync card enough breathing room above the bottom nav */
+.card:last-child {
+  margin-bottom: 28px;
+}
+
+@media (max-width: 380px) {
+  .main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .trail {
+    gap: 5px;
+  }
+
+  .node {
+    font-size: 0.78rem;
+  }
+
+  .sync-pill {
+    font-size: 0.72rem;
+    padding: 5px 8px;
+  }
+
+  .brand h1 {
+    font-size: 1.1rem;
+  }
+
+  .brand p {
+    font-size: 0.78rem;
+  }
+}
