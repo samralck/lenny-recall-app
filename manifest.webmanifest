@@ -1,0 +1,19 @@
+{
+  "name": "Lenny Recall",
+  "short_name": "Lenny Recall",
+  "description": "A 42-day whistle recall and Drop training app for Lenny.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3F5EF",
+  "theme_color": "#2F6F4F",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
