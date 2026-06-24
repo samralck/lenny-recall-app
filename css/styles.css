@@ -627,3 +627,95 @@ hr {
     animation: none !important;
   }
 }
+/* FINAL Plan trail fix — keep 7 columns on iPhone */
+.trail {
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  margin-top: 12px !important;
+}
+
+.trail .node,
+.trail button.node,
+button.node.node {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: 1 / 1 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border-radius: 999px !important;
+  border: 1.5px solid var(--line) !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  background: white !important;
+  color: var(--ink) !important;
+
+  font-size: clamp(0.66rem, 2.75vw, 0.82rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums !important;
+
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+.trail .node.done,
+.trail button.node.done {
+  background: var(--green) !important;
+  color: white !important;
+  border-color: var(--green) !important;
+}
+
+.trail .node.current,
+.trail button.node.current {
+  border-color: var(--amber) !important;
+  box-shadow: 0 0 0 3px rgba(217,149,44,0.20) !important;
+}
+
+.trail .node.checkpoint::after,
+.trail button.node.checkpoint::after {
+  content: "•";
+  color: var(--amber);
+  font-size: 0.75em;
+  line-height: 1;
+  margin-left: 1px;
+}
+
+/* Tighten the Plan card enough for 7 columns */
+.main {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.card {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Stop sideways page movement */
+html,
+body,
+.app-shell,
+.main,
+.card {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
